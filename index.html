@@ -111,7 +111,13 @@ a { color:inherit; }
 footer { text-align:center; color:var(--muted); font-size:.85rem; padding:34px 14px 40px; }
 @media (max-width:520px) {
   .day { overflow:clip; }
-  .day header { position:sticky; top:56px; z-index:10; }
+  .day header {
+    position:sticky; top:56px; z-index:10; display:grid; grid-template-columns:max-content minmax(0,1fr);
+    align-items:center; gap:6px 10px; padding:12px;
+  }
+  .day header .badge { font-size:clamp(1.05rem,4.2vw,1.35rem); }
+  .day header h3 { justify-self:end; margin:0; font-size:clamp(.82rem,3.7vw,1.05rem); text-align:right; white-space:nowrap; }
+  .day header p { grid-column:1 / -1; margin:0; padding:5px 10px; font-size:clamp(.76rem,3vw,.9rem); }
   .timeline li { grid-template-columns:1fr; gap:0; }
   .time.empty { display:none; }
   .time { padding-top:0; }
