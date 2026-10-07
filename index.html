@@ -114,6 +114,19 @@ a { color:inherit; }
 .stay img { width:92px; height:auto; border-radius:10px; flex:none; }
 footer { text-align:center; color:var(--muted); font-size:.85rem; padding:34px 14px 40px; }
 .mobile-day-nav { display:none; }
+.to-top {
+  position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom)); z-index:25;
+  display:inline-flex; align-items:center; gap:6px; padding:10px 15px 10px 16px;
+  border:0; border-radius:999px; background:#fff; color:var(--ink);
+  font-family:inherit; font-size:.85rem; font-weight:700; line-height:1; letter-spacing:.03em; cursor:pointer;
+  box-shadow:0 4px 14px rgb(42 37 64 / 28%); touch-action:manipulation;
+  opacity:0; visibility:hidden; transform:translateY(12px);
+  transition:opacity .25s ease, transform .25s ease, bottom .35s ease, visibility 0s linear .25s;
+}
+.to-top svg { display:block; width:18px; height:18px; }
+.to-top.is-shown { opacity:1; visibility:visible; transform:none; transition-delay:0s; }
+.to-top:active { transform:scale(.95); }
+.mobile-day-nav.is-visible ~ .to-top { bottom:calc(100px + env(safe-area-inset-bottom)); }
 @media (max-width:520px) {
   html { scroll-padding-top:0; }
   body { padding-bottom:calc(82px + env(safe-area-inset-bottom)); }
@@ -191,10 +204,10 @@ footer { text-align:center; color:var(--muted); font-size:.85rem; padding:34px 1
   }
 }
 @media print {
-  .topnav, .mobile-day-nav { display:none; } .day { break-inside:avoid; box-shadow:none; }
+  .topnav, .mobile-day-nav, .to-top { display:none; } .day { break-inside:avoid; box-shadow:none; }
 }
 @media (prefers-reduced-motion:reduce) {
-  .mobile-day-nav { transition-duration:.01ms; }
+  .mobile-day-nav, .to-top { transition-duration:.01ms; }
 }
 </style>
 </head>
@@ -285,6 +298,10 @@ footer { text-align:center; color:var(--muted); font-size:.85rem; padding:34px 1
     </div>
   </div>
 </nav>
+<button class="to-top" type="button" aria-label="เลื่อนขึ้นบนสุด">
+  <span>TOP</span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3H7a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3h-2"/><path d="M12 17V7"/><path d="M8.5 10.5 12 7l3.5 3.5"/></svg>
+</button>
 <script>
 document.querySelectorAll(".day-options a").forEach(link => {
   link.addEventListener("click", () => {
@@ -339,6 +356,32 @@ if (mobileDayNav) {
     if (!event.target.closest(".mobile-day-toggle")) showMobileDayNav();
   });
   dayScroll.addEventListener("scroll", showMobileDayNav, { passive:true });
+
+  // แตะ/สัมผัสนอกแถบเมนู -> หุบแถบลง
+  document.addEventListener("pointerdown", event => {
+    if (!mobileDayNav.classList.contains("is-visible")) return;
+    if (event.target.closest(".mobile-day-nav")) return;
+    clearTimeout(hideTimer);
+    hideMobileDayNav();
+  }, { passive:true });
+}
+
+// ปุ่มเลื่อนขึ้นบนสุด: แสดงเมื่อเลื่อนลงมาประมาณ 1 หน้าจอ
+const toTop = document.querySelector(".to-top");
+if (toTop) {
+  let ticking = false;
+  const updateToTop = () => {
+    ticking = false;
+    toTop.classList.toggle("is-shown", window.scrollY > window.innerHeight * 0.8);
+  };
+  window.addEventListener("scroll", () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(updateToTop); }
+  }, { passive:true });
+  toTop.addEventListener("click", () => {
+    const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top:0, behavior: calm ? "auto" : "smooth" });
+  });
+  updateToTop();
 }
 </script>
 </body>
