@@ -287,6 +287,9 @@
     }
 
     /* ธงประเทศแบบรูป .png (แทน emoji) */
+    .flag-link { display:inline-block; color:inherit; text-decoration:none; line-height:0; border-radius:6px; transition:transform .15s ease; }
+    .flag-link:hover { transform:scale(1.12); }
+    .flag-link:active { transform:scale(.94); }
     .flag {
       display: inline-block;
       width: 1.2em;
@@ -701,6 +704,9 @@
         font-size: clamp(.82rem, 3.7vw, 1.05rem);
         text-align: right;
         white-space: nowrap;
+        font-weight: 400;
+        top: 1px;
+        position: relative;
       }
 
       .day header p {
@@ -741,6 +747,7 @@
 
       .days {
         margin-top: 0;
+        gap: 6px;
       }
     }
 
@@ -821,7 +828,7 @@
       </div>
       <div class="days">
         <article class="day" id="shanghai-d1" style="--c:#e4574f">
-          <header><span class="badge"><img class="flag" src="images/china.png" alt="ธงชาติจีน" width="24" height="24">DAY 1</span>
+          <header><span class="badge"><a class="flag-link" href="#shanghai" aria-label="ไปที่ Shanghai"><img class="flag" src="images/china.png" alt="ธงชาติจีน" width="24" height="24"></a>DAY 1</span>
             <h3>23 ม.ค. 2027 (เสาร์)</h3>
             <p>Arrival • Nanjing Road • The Bund</p>
           </header>
@@ -926,7 +933,7 @@
           </ol>
         </article>
         <article class="day" id="shanghai-d2" style="--c:#2fa05a">
-          <header><span class="badge"><img class="flag" src="images/china.png" alt="ธงชาติจีน" width="24" height="24">DAY 2</span>
+          <header><span class="badge"><a class="flag-link" href="#shanghai" aria-label="ไปที่ Shanghai"><img class="flag" src="images/china.png" alt="ธงชาติจีน" width="24" height="24"></a>DAY 2</span>
             <h3>24 ม.ค. 2027 (อาทิตย์)</h3>
             <p>Café • Xintiandi • Wukang • Anfu • Lujiazui</p>
           </header>
@@ -1021,7 +1028,7 @@
           </ol>
         </article>
         <article class="day" id="shanghai-d3" style="--c:#2f7fd8">
-          <header><span class="badge"><img class="flag" src="images/china.png" alt="ธงชาติจีน" width="24" height="24">DAY 3</span>
+          <header><span class="badge"><a class="flag-link" href="#shanghai" aria-label="ไปที่ Shanghai"><img class="flag" src="images/china.png" alt="ธงชาติจีน" width="24" height="24"></a>DAY 3</span>
             <h3>25 ม.ค. 2027 (จันทร์)</h3>
             <p>Shanghai Disneyland (Full Day)</p>
           </header>
@@ -1163,7 +1170,7 @@
           </ol>
         </article>
         <article class="day" id="shanghai-d4" style="--c:#8a55d0">
-          <header><span class="badge"><img class="flag" src="images/china.png" alt="ธงชาติจีน" width="24" height="24">DAY 4</span>
+          <header><span class="badge"><a class="flag-link" href="#shanghai" aria-label="ไปที่ Shanghai"><img class="flag" src="images/china.png" alt="ธงชาติจีน" width="24" height="24"></a>DAY 4</span>
             <h3>26 ม.ค. 2027 (อังคาร)</h3>
             <p>Last Morning • Shopping • Airport</p>
           </header>
@@ -1284,7 +1291,7 @@
       </div>
       <div class="days">
         <article class="day" id="japan-d1" style="--c:#ea5b82">
-          <header><span class="badge"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24">DAY 1</span>
+          <header><span class="badge"><a class="flag-link" href="#japan" aria-label="ไปที่ Japan"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24"></a>DAY 1</span>
             <h3>26 ม.ค. 2027 (อังคาร)</h3>
             <p>Shanghai → Tokyo (Ueno)</p>
           </header>
@@ -1344,7 +1351,7 @@
           </ol>
         </article>
         <article class="day" id="japan-d2" style="--c:#ef8a2b">
-          <header><span class="badge"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24">DAY 2</span>
+          <header><span class="badge"><a class="flag-link" href="#japan" aria-label="ไปที่ Japan"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24"></a>DAY 2</span>
             <h3>27 ม.ค. 2027 (พุธ)</h3>
             <p>Ueno → Kawaguchiko → Hakuba</p>
           </header>
@@ -1440,7 +1447,7 @@
           </ol>
         </article>
         <article class="day" id="japan-d3" style="--c:#2f8fe0">
-          <header><span class="badge"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24">DAY 3</span>
+          <header><span class="badge"><a class="flag-link" href="#japan" aria-label="ไปที่ Japan"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24"></a>DAY 3</span>
             <h3>28 ม.ค. 2027 (พฤหัส)</h3>
             <p>Hakuba Snow Day</p>
           </header>
@@ -1514,7 +1521,7 @@
           </ol>
         </article>
         <article class="day" id="japan-d4" style="--c:#3aa655">
-          <header><span class="badge"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24">DAY 4</span>
+          <header><span class="badge"><a class="flag-link" href="#japan" aria-label="ไปที่ Japan"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24"></a>DAY 4</span>
             <h3>29 ม.ค. 2027 (ศุกร์)</h3>
             <p>Hakuba → Tokyo (Ueno)</p>
           </header>
@@ -1602,7 +1609,7 @@
           </ol>
         </article>
         <article class="day" id="japan-d5" style="--c:#8a55d0">
-          <header><span class="badge"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24">DAY 5</span>
+          <header><span class="badge"><a class="flag-link" href="#japan" aria-label="ไปที่ Japan"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24"></a>DAY 5</span>
             <h3>30 ม.ค. 2027 (เสาร์)</h3>
             <p>Kamakura &amp; Enoshima + Shinjuku Night</p>
           </header>
@@ -1700,7 +1707,7 @@
           </ol>
         </article>
         <article class="day" id="japan-d6" style="--c:#d84a6a">
-          <header><span class="badge"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24">DAY 6</span>
+          <header><span class="badge"><a class="flag-link" href="#japan" aria-label="ไปที่ Japan"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24"></a>DAY 6</span>
             <h3>31 ม.ค. 2027 (อาทิตย์)</h3>
             <p>Asakusa → Narita → Bangkok</p>
           </header>
