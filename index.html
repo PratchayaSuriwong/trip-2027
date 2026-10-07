@@ -23,8 +23,33 @@ a { color:inherit; }
   position:sticky; top:0; z-index:20; display:flex; gap:8px; align-items:center; justify-content:center;
   padding:10px 12px; background:rgba(255,255,255,.88); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
 }
-.topnav a { text-decoration:none; font-weight:700; padding:6px 16px; border-radius:999px; background:#f1ebf7; font-size:.95rem; }
-.topnav a:hover { background:#e4d9f2; }
+.nav-group { display:flex; align-items:center; }
+.topnav .nav-group > a, .day-menu summary {
+  text-decoration:none; font-weight:700; padding:6px 16px; background:#f1ebf7; font-size:.95rem;
+}
+.topnav .nav-group > a { border-radius:999px 0 0 999px; }
+.day-menu { position:relative; }
+.day-menu summary {
+  display:grid; place-items:center; width:42px; height:36px; padding:0; border-left:1px solid #fff;
+  border-radius:0 999px 999px 0; cursor:pointer; list-style:none;
+}
+.day-menu summary::-webkit-details-marker { display:none; }
+.day-menu summary::after {
+  content:""; width:9px; height:9px; border-right:3px solid var(--ink); border-bottom:3px solid var(--ink);
+  transform:translateY(-2px) rotate(45deg); transition:transform .2s;
+}
+.day-menu[open] summary::after { transform:translateY(2px) rotate(225deg); }
+.topnav .nav-group > a:hover, .day-menu summary:hover { background:#e4d9f2; }
+.day-options {
+  position:absolute; top:calc(100% + 10px); left:50%; transform:translateX(-50%); z-index:1;
+  min-width:150px; padding:10px; border-radius:26px; background:#f1ebf7; box-shadow:0 8px 22px rgba(42,37,64,.2);
+}
+.topnav .day-options a {
+  display:block; margin-bottom:8px; padding:8px 14px; border-radius:999px; background:var(--c);
+  color:#fff; text-align:center; text-decoration:none; font-weight:700;
+}
+.topnav .day-options a:last-child { margin-bottom:0; }
+.topnav .day-options a:hover { filter:brightness(.92); }
 .hero {
   text-align:center; padding:56px 16px 40px; color:#fff;
   background:linear-gradient(135deg,#e4574f,#ea5b82 40%,#8a55d0);
@@ -87,8 +112,33 @@ footer { text-align:center; color:var(--muted); font-size:.85rem; padding:34px 1
 </style>
 </head>
 <body>
-<nav class="topnav">
-  <a href="#shanghai">🇨🇳 Shanghai</a><a href="#japan">🇯🇵 Japan</a>
+<nav class="topnav" aria-label="เลือกเมืองและวัน">
+  <div class="nav-group">
+    <a href="#shanghai">🇨🇳 Shanghai</a>
+    <details class="day-menu">
+      <summary aria-label="เลือกวันใน Shanghai"></summary>
+      <div class="day-options">
+        <a href="#shanghai-d1" style="--c:#e4574f">Day 1</a>
+        <a href="#shanghai-d2" style="--c:#2fa05a">Day 2</a>
+        <a href="#shanghai-d3" style="--c:#2f7fd8">Day 3</a>
+        <a href="#shanghai-d4" style="--c:#8a55d0">Day 4</a>
+      </div>
+    </details>
+  </div>
+  <div class="nav-group">
+    <a href="#japan">🇯🇵 Japan</a>
+    <details class="day-menu">
+      <summary aria-label="เลือกวันใน Japan"></summary>
+      <div class="day-options">
+        <a href="#japan-d1" style="--c:#ea5b82">Day 1</a>
+        <a href="#japan-d2" style="--c:#ef8a2b">Day 2</a>
+        <a href="#japan-d3" style="--c:#2f8fe0">Day 3</a>
+        <a href="#japan-d4" style="--c:#3aa655">Day 4</a>
+        <a href="#japan-d5" style="--c:#8a55d0">Day 5</a>
+        <a href="#japan-d6" style="--c:#d84a6a">Day 6</a>
+      </div>
+    </details>
+  </div>
 </nav>
 
 <header class="hero">
@@ -122,5 +172,12 @@ footer { text-align:center; color:var(--muted); font-size:.85rem; padding:34px 1
 </main>
 
 <footer>Shanghai 23–26 Jan 2027 · Japan 26–31 Jan 2027 — เวลาทั้งหมดเป็นแนวทาง ปรับตามสถานการณ์จริงได้</footer>
+<script>
+document.querySelectorAll(".day-options a").forEach(link => {
+  link.addEventListener("click", () => {
+    link.closest("details").open = false;
+  });
+});
+</script>
 </body>
 </html>
