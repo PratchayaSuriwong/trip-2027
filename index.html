@@ -30,7 +30,7 @@ a { color:inherit; }
 .topnav .nav-group > a { border-radius:999px 0 0 999px; }
 .day-menu { position:relative; }
 .day-menu summary {
-  display:grid; place-items:center; width:42px; height:36px; padding:0; border-left:1px solid #fff;
+  display:grid; place-items:center; width:42px; height:35px; padding:0; border-left:1px solid #fff;
   border-radius:0 999px 999px 0; cursor:pointer; list-style:none;
 }
 .day-menu summary::-webkit-details-marker { display:none; }
@@ -41,8 +41,16 @@ a { color:inherit; }
 .day-menu[open] summary::after { transform:translateY(2px) rotate(225deg); }
 .topnav .nav-group > a:hover, .day-menu summary:hover { background:#e4d9f2; }
 .day-options {
-  position:absolute; top:calc(100% + 10px); left:50%; transform:translateX(-50%); z-index:1;
-  min-width:150px; padding:10px; border-radius:26px; background:#f1ebf7; box-shadow:0 8px 22px rgba(42,37,64,.2);
+  position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(calc(-50% - 30px));
+    z-index: 1;
+    min-width: 100px;
+    padding: 10px;
+    border-radius: 26px;
+    background: #f1ebf7;
+    box-shadow: 0 8px 22px rgba(42, 37, 64, .2);
 }
 .topnav .day-options a {
   display:block; margin-bottom:8px; padding:8px 14px; border-radius:999px; background:var(--c);
@@ -62,7 +70,7 @@ a { color:inherit; }
 .hero .leg span { display:block; opacity:.92; font-size:.92rem; }
 .trip { max-width:1240px; margin:0 auto; padding:34px 14px 10px; }
 .trip-hero {
-  border-radius:24px; padding:46px 24px 22px; color:#fff; text-align:center; background-size:cover; background-position:center;
+  border-radius:16px; padding:46px 24px 22px; color:#fff; text-align:center; background-size:cover; background-position:center;
   min-height:240px; display:flex; flex-direction:column; justify-content:flex-end; align-items:center;
 }
 .trip-hero h2 { margin:0; font-size:clamp(1.8rem,5vw,3rem); text-shadow:0 2px 10px rgba(0,0,0,.45); }
@@ -102,6 +110,8 @@ a { color:inherit; }
 .stay img { width:92px; height:auto; border-radius:10px; flex:none; }
 footer { text-align:center; color:var(--muted); font-size:.85rem; padding:34px 14px 40px; }
 @media (max-width:520px) {
+  .day { overflow:clip; }
+  .day header { position:sticky; top:56px; z-index:10; }
   .timeline li { grid-template-columns:1fr; gap:0; }
   .time.empty { display:none; }
   .time { padding-top:0; }
@@ -176,6 +186,19 @@ footer { text-align:center; color:var(--muted); font-size:.85rem; padding:34px 1
 document.querySelectorAll(".day-options a").forEach(link => {
   link.addEventListener("click", () => {
     link.closest("details").open = false;
+  });
+});
+document.querySelectorAll(".day-menu").forEach(menu => {
+  menu.querySelector("summary").addEventListener("click", () => {
+    document.querySelectorAll(".day-menu[open]").forEach(otherMenu => {
+      if (otherMenu !== menu) otherMenu.open = false;
+    });
+  });
+});
+document.addEventListener("click", event => {
+  if (event.target.closest(".day-menu")) return;
+  document.querySelectorAll(".day-menu[open]").forEach(menu => {
+    menu.open = false;
   });
 });
 </script>
