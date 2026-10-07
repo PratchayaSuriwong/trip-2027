@@ -73,6 +73,10 @@ a { color:inherit; }
   border-radius:16px; padding:46px 24px 22px; color:#fff; text-align:center; background-size:cover; background-position:center;
   min-height:240px; display:flex; flex-direction:column; justify-content:flex-end; align-items:center;
 }
+.image-profile-group img {
+  display:block; width:clamp(250px,24vw,170px); aspect-ratio:1; object-fit:cover; margin:0 auto 12px;
+  border:3px solid rgba(255,255,255,.9); border-radius:20px; box-shadow:0 4px 14px rgba(0,0,0,.3);
+}
 .trip-hero h2 { margin:0; font-size:clamp(1.8rem,5vw,3rem); text-shadow:0 2px 10px rgba(0,0,0,.45); }
 .trip-hero p { margin:6px 0 16px; text-shadow:0 1px 6px rgba(0,0,0,.5); }
 .chips { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
@@ -118,13 +122,11 @@ footer { text-align:center; color:var(--muted); font-size:.85rem; padding:34px 1
         right: 0;
         bottom: 0;
         left: 0;
-        margin: 14px;
         z-index: 30;
         display: block;
         padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
         background: rgb(255 255 255 / 86%);
         backdrop-filter: blur(3px);
-        border-radius: 1rem;
         border-top: 1px solid var(--line);
         box-shadow: 0px 0px 16px rgb(42 37 64 / 41%);
   }
@@ -141,7 +143,7 @@ footer { text-align:center; color:var(--muted); font-size:.85rem; padding:34px 1
     flex:none; padding:4px 10px; border-radius:999px; background:var(--c); color:#fff;
     font-size:.75rem; font-weight:700; line-height:1.4; text-decoration:none; white-space:nowrap;
   }
-  .day { overflow:clip; }
+  .day { overflow:clip; border-radius:0; box-shadow:none; border:none; }
   .day header {
     position:sticky; top:0; z-index:10; display:grid; grid-template-columns:max-content minmax(0,1fr);
     align-items:center; gap:6px 10px; padding:12px;
@@ -152,6 +154,14 @@ footer { text-align:center; color:var(--muted); font-size:.85rem; padding:34px 1
   .timeline li { grid-template-columns:1fr; gap:0; }
   .time.empty { display:none; }
   .time { padding-top:0; }
+  .trip {
+    padding: 0px;
+  }
+  .trip-hero {
+    border-radius: 0px;
+    padding: 36px 16px 18px;
+    min-height: 180px;
+  }
 }
 @media print {
   .topnav, .mobile-day-nav { display:none; } .day { break-inside:avoid; box-shadow:none; }
@@ -189,6 +199,7 @@ footer { text-align:center; color:var(--muted); font-size:.85rem; padding:34px 1
 </nav>
 
 <header class="hero">
+  <div class="image-profile-group"><img src="images/profile-group.png" alt="ภาพกลุ่มเพื่อนเดินทาง Shanghai และ Japan"></div>
   <h1>Shanghai → Japan</h1>
   <div class="dates">23 – 31 January 2027</div>
   <div class="legs">
