@@ -286,6 +286,16 @@
       font-size: 1.35rem;
     }
 
+    /* ธงประเทศแบบรูป .png (แทน emoji) */
+    .flag {
+      display: inline-block;
+      width: 1.2em;
+      height: 1.2em;
+      margin-right: .45em;
+      vertical-align: -.2em;
+      object-fit: contain;
+    }
+
     .day header h3 {
       margin: 2px 0 0;
       font-size: 1.05rem;
@@ -299,6 +309,54 @@
       padding: 3px 10px;
       font-size: .82rem;
       font-weight: 500;
+    }
+
+    /* ภาพกลุ่มชิดซ้ายในหัวการ์ด DAY (ทุกการ์ด) */
+    .day {
+      --av: 96px;
+      --profile-img: url("images/profile-group.jpg");
+      container-type: inline-size;
+    }
+
+    .day header {
+      display: grid;
+      grid-template-columns: var(--av) minmax(0, 1fr);
+      grid-template-areas:
+        "img badge"
+        "img date"
+        "img pill";
+      align-items: center;
+      column-gap: 14px;
+      row-gap: 2px;
+      text-align: left;
+    }
+
+    .day header::before {
+      content: "";
+      grid-area: img;
+      width: var(--av);
+      height: var(--av);
+      box-sizing: border-box;
+      border: 3px solid #fff;
+      border-radius: 16px;
+      background: var(--profile-img) center / cover no-repeat;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+    }
+
+    .day header .badge { grid-area: badge; justify-self: start; }
+    .day header h3 { grid-area: date; justify-self: start; margin: 0; }
+    .day header p { grid-area: pill; margin: 6px 0 0; text-align: center; }
+
+    @container (min-width: 480px) {
+      .day header {
+        grid-template-columns: var(--av) minmax(0, 1fr) auto;
+        grid-template-areas:
+          "img badge date"
+          "img pill pill";
+        row-gap: 8px;
+      }
+      .day header h3 { justify-self: end; text-align: right; }
+      .day header p { margin: 0; }
     }
 
     .timeline {
@@ -623,7 +681,11 @@
         top: 0;
         z-index: 10;
         display: grid;
-        grid-template-columns: max-content minmax(0, 1fr);
+        --av: 64px;
+        grid-template-columns: var(--av) minmax(0, 1fr) auto;
+        grid-template-areas: "img badge date" "img pill pill";
+        column-gap: 10px;
+        row-gap: 6px;
         align-items: center;
         gap: 6px 10px;
         padding: 12px;
@@ -642,7 +704,6 @@
       }
 
       .day header p {
-        grid-column: 1 / -1;
         margin: 0;
         padding: 5px 10px;
         font-size: clamp(.76rem, 3vw, .9rem);
@@ -677,6 +738,10 @@
       .info-mb-1 {
         margin-bottom: 4rem;
       }
+
+      .days {
+        margin-top: 0;
+      }
     }
 
     @media print {
@@ -703,7 +768,7 @@
 <body>
   <nav class="topnav" aria-label="เลือกเมืองและวัน">
     <div class="nav-group">
-      <a href="#shanghai">🇨🇳 Shanghai</a>
+      <a href="#shanghai"><img class="flag" src="images/china.png" alt="" width="24" height="24">Shanghai</a>
       <details class="day-menu">
         <summary aria-label="เลือกวันใน Shanghai"></summary>
         <div class="day-options">
@@ -715,7 +780,7 @@
       </details>
     </div>
     <div class="nav-group">
-      <a href="#japan">🇯🇵 Japan</a>
+      <a href="#japan"><img class="flag" src="images/japan.png" alt="" width="24" height="24">Japan</a>
       <details class="day-menu">
         <summary aria-label="เลือกวันใน Japan"></summary>
         <div class="day-options">
@@ -756,7 +821,7 @@
       </div>
       <div class="days">
         <article class="day" id="shanghai-d1" style="--c:#e4574f">
-          <header><span class="badge">🇨🇳 DAY 1</span>
+          <header><span class="badge"><img class="flag" src="images/china.png" alt="ธงชาติจีน" width="24" height="24">DAY 1</span>
             <h3>23 ม.ค. 2027 (เสาร์)</h3>
             <p>Arrival • Nanjing Road • The Bund</p>
           </header>
@@ -861,7 +926,7 @@
           </ol>
         </article>
         <article class="day" id="shanghai-d2" style="--c:#2fa05a">
-          <header><span class="badge">🇨🇳 DAY 2</span>
+          <header><span class="badge"><img class="flag" src="images/china.png" alt="ธงชาติจีน" width="24" height="24">DAY 2</span>
             <h3>24 ม.ค. 2027 (อาทิตย์)</h3>
             <p>Café • Xintiandi • Wukang • Anfu • Lujiazui</p>
           </header>
@@ -956,7 +1021,7 @@
           </ol>
         </article>
         <article class="day" id="shanghai-d3" style="--c:#2f7fd8">
-          <header><span class="badge">🇨🇳 DAY 3</span>
+          <header><span class="badge"><img class="flag" src="images/china.png" alt="ธงชาติจีน" width="24" height="24">DAY 3</span>
             <h3>25 ม.ค. 2027 (จันทร์)</h3>
             <p>Shanghai Disneyland (Full Day)</p>
           </header>
@@ -1098,7 +1163,7 @@
           </ol>
         </article>
         <article class="day" id="shanghai-d4" style="--c:#8a55d0">
-          <header><span class="badge">🇨🇳 DAY 4</span>
+          <header><span class="badge"><img class="flag" src="images/china.png" alt="ธงชาติจีน" width="24" height="24">DAY 4</span>
             <h3>26 ม.ค. 2027 (อังคาร)</h3>
             <p>Last Morning • Shopping • Airport</p>
           </header>
@@ -1219,7 +1284,7 @@
       </div>
       <div class="days">
         <article class="day" id="japan-d1" style="--c:#ea5b82">
-          <header><span class="badge">🇯🇵 DAY 1</span>
+          <header><span class="badge"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24">DAY 1</span>
             <h3>26 ม.ค. 2027 (อังคาร)</h3>
             <p>Shanghai → Tokyo (Ueno)</p>
           </header>
@@ -1279,7 +1344,7 @@
           </ol>
         </article>
         <article class="day" id="japan-d2" style="--c:#ef8a2b">
-          <header><span class="badge">🇯🇵 DAY 2</span>
+          <header><span class="badge"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24">DAY 2</span>
             <h3>27 ม.ค. 2027 (พุธ)</h3>
             <p>Ueno → Kawaguchiko → Hakuba</p>
           </header>
@@ -1375,7 +1440,7 @@
           </ol>
         </article>
         <article class="day" id="japan-d3" style="--c:#2f8fe0">
-          <header><span class="badge">🇯🇵 DAY 3</span>
+          <header><span class="badge"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24">DAY 3</span>
             <h3>28 ม.ค. 2027 (พฤหัส)</h3>
             <p>Hakuba Snow Day</p>
           </header>
@@ -1449,7 +1514,7 @@
           </ol>
         </article>
         <article class="day" id="japan-d4" style="--c:#3aa655">
-          <header><span class="badge">🇯🇵 DAY 4</span>
+          <header><span class="badge"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24">DAY 4</span>
             <h3>29 ม.ค. 2027 (ศุกร์)</h3>
             <p>Hakuba → Tokyo (Ueno)</p>
           </header>
@@ -1537,7 +1602,7 @@
           </ol>
         </article>
         <article class="day" id="japan-d5" style="--c:#8a55d0">
-          <header><span class="badge">🇯🇵 DAY 5</span>
+          <header><span class="badge"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24">DAY 5</span>
             <h3>30 ม.ค. 2027 (เสาร์)</h3>
             <p>Kamakura &amp; Enoshima + Shinjuku Night</p>
           </header>
@@ -1635,7 +1700,7 @@
           </ol>
         </article>
         <article class="day" id="japan-d6" style="--c:#d84a6a">
-          <header><span class="badge">🇯🇵 DAY 6</span>
+          <header><span class="badge"><img class="flag" src="images/japan.png" alt="ธงชาติญี่ปุ่น" width="24" height="24">DAY 6</span>
             <h3>31 ม.ค. 2027 (อาทิตย์)</h3>
             <p>Asakusa → Narita → Bangkok</p>
           </header>
@@ -1769,7 +1834,7 @@
     <button class="mobile-day-toggle" type="button" aria-label="แสดงเมนูเลือกวัน" aria-expanded="false"></button>
     <div class="mobile-day-scroll">
       <div class="mobile-day-group">
-        <a class="mobile-day-city" href="#shanghai">🇨🇳 Shanghai</a>
+        <a class="mobile-day-city" href="#shanghai"><img class="flag" src="images/china.png" alt="" width="24" height="24">Shanghai</a>
         <div class="mobile-day-links">
           <a href="#shanghai-d1" style="--c:#e4574f">Day 1</a>
           <a href="#shanghai-d2" style="--c:#2fa05a">Day 2</a>
@@ -1778,7 +1843,7 @@
         </div>
       </div>
       <div class="mobile-day-group">
-        <a class="mobile-day-city" href="#japan">🇯🇵 Japan</a>
+        <a class="mobile-day-city" href="#japan"><img class="flag" src="images/japan.png" alt="" width="24" height="24">Japan</a>
         <div class="mobile-day-links">
           <a href="#japan-d1" style="--c:#ea5b82">Day 1</a>
           <a href="#japan-d2" style="--c:#ef8a2b">Day 2</a>
